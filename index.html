@@ -1,108 +1,84 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Organizador de Tarefas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e8f5e9; /* Verde claro */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px S10px rgba(0,0,0,0.1);
-            width: 320px;
-            text-align: center;
-        }
-        .login-container h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .profile-selector {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-            background-color: #f0f0f0;
-            border-radius: 20px;
-            padding: 5px;
-        }
-        .profile-selector label {
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 20px;
-            transition: background-color 0.3s;
-        }
-        .profile-selector input[type="radio"] {
-            display: none;
-        }
-        .profile-selector input[type="radio"]:checked + label {
-            background-color: #ffb700; /* Amarelo mais escuro */
-            color: #333;
-            font-weight: bold;
-        }
-        .login-button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            background-color: #ffb700; /* Amarelo mais escuro */
-            color: #333;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .login-button:hover {
-            background-color: #ffa700; /* Variação do amarelo para hover */
-        }
-    </style>
+    <title>Dashboard do Gestor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="fotos/sitelbra.png">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <div class="profile-selector">
-            <input type="radio" id="gestor" name="profile" value="gestor" checked>
-            <label for="gestor">Gestor</label>
-
-            <input type="radio" id="funcionario" name="profile" value="funcionario">
-            <label for="funcionario">Funcionário</label>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header"><img src="fotos/sitelbra.png" alt="Logo Sitelbra" class="logo"></div>
+            <nav class="sidebar-nav">   
+                <ul>
+                    <li class="active"><a href="index.html">Dashboard</a></li>
+                    <li><a href="funcionarios.html">Funcionários</a></li>
+                    <li><a href="tarefas.html">Tarefas</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="main-content-area">
+            <header>
+                <h1>Dashboard do Gestor</h1>
+                <button class="add-task-btn">+ Nova Tarefa</button>
+            </header>
+            <main>
+                <section class="summary-cards">
+                    <div class="card"><h2>Total de Tarefas</h2><p id="total-tasks">0</p></div>
+                    <div class="card"><h2>Pendentes</h2><p id="pending-tasks">0</p></div>
+                    <div class="card"><h2>Em Andamento</h2><p id="inprogress-tasks">0</p></div>
+                    <div class="card"><h2>Concluídas</h2><p id="completed-tasks">0</p></div>
+                </section>
+                <section class="main-data">
+                    <div class="task-list">
+                        <h2>Tarefas Recentes</h2>
+                        <table>
+                            <thead><tr><th>Tarefa</th><th>Responsável</th><th>Prazo</th><th>Status</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="team-workload">
+                        <h2>Visão Geral da Equipe</h2>
+                        <div class="employee-grid" id="employee-grid-container"></div>
+                    </div>
+                </section>
+            </main>
         </div>
-        <form>
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="login-button">Entrar</button>
-        </form>
     </div>
-    <script src="login.js"></script>
+    
+    <div class="modal-overlay" id="employee-modal">
+        <div class="modal-content"><button class="modal-close" id="modal-close-btn">&times;</button><div id="modal-body"></div></div>
+    </div>
+
+    <div class="modal-overlay" id="add-task-modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal>&times;</button>
+            <h2>Adicionar Nova Tarefa</h2>
+            <form id="add-task-form" class="modal-form">
+                <div class="form-group">
+                    <label for="task-title">Título da Tarefa</label>
+                    <input type="text" id="task-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-responsible">Responsável</label>
+                    <select id="task-responsible" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="task-due-date">Prazo</label>
+                    <input type="date" id="task-due-date" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
+                    <button type="submit" class="btn-confirm">Adicionar Tarefa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Funcionários</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="fotos/sitelbra.png">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header"><img src="fotos/sitelbra.png" alt="Logo Sitelbra" class="logo"></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li> 
+                    <li class="active"><a href="funcionarios.html">Funcionários</a></li>
+                    <li><a href="tarefas.html">Tarefas</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="main-content-area">
+            <header>
+                <h1>Gerenciamento de Funcionários</h1>
+                <button class="btn-primary" id="add-employee-btn">+ Adicionar Funcionário</button>
+            </header>
+            <main>
+                <div class="page-controls">
+                    <input type="text" id="search-bar" class="search-input" placeholder="Buscar por nome, cargo ou e-mail...">
+                    <select id="status-filter" class="filter-select">
+                        <option value="todos">Todos os Status</option>
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                    </select>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Funcionário</th>
+                                <th>Cargo</th>
+                                <th>Contato</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employee-table-body"></tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="add-edit-modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal>&times;</button>
+            <h2 id="modal-title">Adicionar Funcionário</h2>
+            <form id="add-edit-form" class="modal-form">
+                <input type="hidden" id="employee-id">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Cargo</label>
+                    <input type="text" id="role" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="text" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status">
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
+                    <button type="submit" class="btn-confirm">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="delete-confirm-modal">
+        <div class="modal-content">
+            <h2>Confirmar Exclusão</h2>
+            <p>Você tem certeza que deseja excluir este funcionário? Esta ação não pode ser desfeita.</p>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
+                <button type="button" id="confirm-delete-btn" class="btn-danger">Confirmar Exclusão</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="funcionarios.js"></script> 
+</body>
+</html>

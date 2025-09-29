@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios Gerenciais</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" href="fotos/sitelbra.png">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header"><img src="fotos/sitelbra.png" alt="Logo Sitelbra" class="logo"></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li> 
+                    <li><a href="funcionarios.html">Funcionários</a></li>
+                    <li><a href="tarefas.html">Tarefas</a></li>
+                    <li class="active"><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-area">
+            <header>
+                <h1>Relatórios Gerenciais</h1>
+                </header>
+
+            <main>
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h2>Tarefas por Status</h2>
+                        <canvas id="tasksStatusChart"></canvas>
+                    </div>
+
+                    <div class="report-card">
+                        <h2>Carga de Trabalho por Funcionário</h2>
+                        <canvas id="workloadChart"></canvas>
+                    </div>
+
+                    <div class="report-card">
+                        <h2>Tarefas por Prioridade</h2>
+                        <canvas id="priorityChart"></canvas>
+                    </div>
+
+                    <div class="report-card">
+                        <h2>Progresso de Conclusão de Tarefas (Mensal)</h2>
+                        <canvas id="tasksOverTimeChart"></canvas>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script src="relatorios.js"></script> 
+</body>
+</html>

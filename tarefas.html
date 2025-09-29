@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="fotos/sitelbra.png">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header"><img src="fotos/sitelbra.png" alt="Logo Sitelbra" class="logo"></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li> 
+                    <li><a href="funcionarios.html">Funcionários</a></li>
+                    <li class="active"><a href="tarefas.html">Tarefas</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-area">
+            <header>
+                <h1>Quadro de Tarefas (Kanban)</h1>
+                <button class="btn-primary" id="add-task-btn">+ Nova Tarefa</button>
+            </header>
+
+            <main>
+                <div class="page-controls">
+                    <input type="text" id="task-search" class="search-input" placeholder="Buscar por título da tarefa...">
+                    <select id="employee-filter" class="filter-select">
+                        <option value="todos">Todos os Funcionários</option>
+                        </select>
+                </div>
+
+                <div class="kanban-board">
+                    <div class="kanban-column">
+                        <h3 class="column-title" style="background-color: #ffebee; color: #c62828;">Pendente</h3>
+                        <div class="tasks-container" id="tasks-pending" data-status="pending">
+                            </div>
+                    </div>
+                    <div class="kanban-column">
+                        <h3 class="column-title" style="background-color: #FFF9C4; color: #F57F17;">Em Andamento</h3>
+                        <div class="tasks-container" id="tasks-in-progress" data-status="in-progress">
+                            </div>
+                    </div>
+                    <div class="kanban-column">
+                        <h3 class="column-title" style="background-color: #e8f5e9; color: #2e7d32;">Concluída</h3>
+                        <div class="tasks-container" id="tasks-completed" data-status="completed">
+                            </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="task-modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal>&times;</button>
+            <h2 id="task-modal-title">Nova Tarefa</h2>
+            <form id="task-form" class="modal-form">
+                <input type="hidden" id="task-id">
+                <div class="form-group">
+                    <label for="task-title">Título da Tarefa</label>
+                    <input type="text" id="task-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-responsible">Responsável</label>
+                    <select id="task-responsible" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="task-due-date">Prazo</label>
+                    <input type="date" id="task-due-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Prioridade</label>
+                    <select id="task-priority">
+                        <option value="low">Baixa</option>
+                        <option value="medium">Média</option>
+                        <option value="high">Alta</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
+                    <button type="submit" class="btn-confirm">Salvar Tarefa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="tarefas.js"></script> 
+</body>
+</html>
