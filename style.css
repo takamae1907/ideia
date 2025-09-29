@@ -879,241 +879,118 @@ body.dark-mode .btn-secondary {
 
 /* ============================
    RESPONSIVIDADE
-   Cole a partir daqui
 ============================ */
 
-/* Ajustes gerais em telas médias */
+/* Telas grandes (sem muitas alterações) */
 @media (max-width: 1200px) {
-    .summary-cards {
-        gap: 20px;
-    }
-
-    .employee-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
     .reports-grid {
         grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     }
-
-    .table-container {
-        padding: 20px;
-    }
 }
 
-/* Tablets / notebooks pequenos */
+/* Tablets / ecrãs menores */
 @media (max-width: 992px) {
     .sidebar {
-        width: 200px;
+        width: 220px;
     }
-
     .main-data {
         flex-direction: column;
     }
-
-    .team-workload,
-    .task-list {
-        width: 100%;
-    }
-
     .kanban-board {
         grid-template-columns: 1fr 1fr;
-        gap: 16px;
     }
-
-    .summary-cards {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    .reports-grid {
+        grid-template-columns: 1fr;
     }
-
-    th,
-    td {
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .employee-info-cell {
-        min-width: 160px;
+    h1 {
+        font-size: 24px;
     }
 }
 
-/* Mobile: sidebar “off-canvas”, grids em 1 coluna, fontes e espaçamentos menores */
+/* Mobile (abaixo de 768px) */
 @media (max-width: 768px) {
     .app-container {
         flex-direction: column;
     }
 
-    /* Sidebar como off-canvas */
     .sidebar {
         position: fixed;
+        left: -250px; /* Escondido fora da tela */
         top: 0;
-        left: -260px;
-        height: 100vh;
+        height: 100%;
         width: 240px;
-        /* mantém o layout interno */
+        z-index: 1200;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
         transition: left .3s ease;
-        z-index: 1100;
     }
-
-    /* Quando quiser abrir a sidebar no mobile, adicione a classe .open via JS */
-    .sidebar.open {
+    
+    /* Adicione uma classe 'sidebar-open' ao body via JS para mostrar o menu */
+    body.sidebar-open .sidebar {
         left: 0;
     }
-
+    
     .main-content-area {
-        padding: 20px;
-        margin-left: 0;
-        /* garante que não empurre o conteúdo */
-    }
-
-    header {
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    .add-task-btn,
-    .btn-primary {
-        font-size: 15px;
-        padding: 10px 16px;
-    }
-
-    .summary-cards {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .card {
-        padding: 18px;
-    }
-
-    .card p {
-        font-size: 28px;
-    }
-
-    .employee-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .employee-card {
-        padding: 16px;
-    }
-
-    .employee-avatar {
-        width: 64px;
-        height: 64px;
-        font-size: 20px;
-    }
-
-    .table-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    table {
-        min-width: 640px;
-    }
-
-    /* evita quebra de colunas; scroll horizontal no mobile */
-
-    .kanban-board {
-        grid-template-columns: 1fr;
-    }
-
-    .tasks-container {
-        min-height: 320px;
-    }
-
-    .modal-content {
-        width: 94%;
-        padding: 22px;
-    }
-
-    .modal-header .employee-avatar {
-        width: 72px;
-        height: 72px;
-        margin-right: 14px;
-    }
-}
-
-/* Celulares pequenos */
-@media (max-width: 480px) {
-    .sidebar {
-        width: 220px;
-    }
-
-    .add-task-btn,
-    .btn-primary {
+        padding: 20px 15px;
         width: 100%;
     }
 
-    .search-input,
-    .filter-select {
-        font-size: 14px;
-        padding: 10px;
+    header {
+        flex-wrap: wrap;
+        gap: 15px;
     }
 
-    .action-buttons {
-        min-width: 80px;
+    .summary-cards, .employee-grid, .kanban-board {
+        grid-template-columns: 1fr;
+    }
+    
+    .kanban-board {
+        gap: 15px;
     }
 
-    .action-buttons button {
-        margin-right: 10px;
-        font-size: 16px;
+    .page-controls {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    th,
-    td {
-        padding: 10px;
-        font-size: 13px;
+    .add-task-btn, .btn-primary {
+        width: 100%;
+        text-align: center;
     }
 
-    .task-card {
-        padding: 12px;
-    }
-
-    .task-details {
-        font-size: 12px;
-    }
-
-    .settings-card {
-        padding: 18px;
-    }
-
-    .switch {
-        width: 46px;
-        height: 26px;
-    }
-
-    .slider:before {
-        height: 18px;
-        width: 18px;
-        transform: translateX(0);
-    }
-
-    input:checked+.slider:before {
-        transform: translateX(20px);
+    /* Adicione um botão "hamburguer" no seu HTML para controlar a sidebar */
+    .menu-toggle {
+        display: block; /* Mostrar o botão hamburguer */
+        /* Estilize o botão aqui */
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1300;
+        color: var(--cor-principal);
     }
 }
 
-/* Modo escuro + mobile: contraste e bordas */
-@media (max-width: 768px) {
-    body.dark-mode .sidebar {
-        border-right: 1px solid #2a2a2a;
+/* Celulares pequenos (abaixo de 480px) */
+@media (max-width: 480px) {
+    .main-content-area {
+        padding: 15px 10px;
     }
-
-    body.dark-mode .table-container {
-        box-shadow: none;
+    h1 {
+        font-size: 20px;
     }
-}
-
-/* Utilitário opcional para esconder/mostrar no mobile */
-@media (max-width: 768px) {
-    .hide-on-mobile {
-        display: none !important;
+    .card, .report-card, .settings-card {
+        padding: 20px;
     }
-}
-
-@media (min-width: 769px) {
-    .show-only-mobile {
-        display: none !important;
+    .modal-content {
+        padding: 20px;
+    }
+    .form-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-secondary, .btn-confirm, .btn-danger {
+        width: 100%;
+        margin: 0;
     }
 }
